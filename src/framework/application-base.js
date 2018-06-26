@@ -9,6 +9,13 @@ export class ApplicationBase {
         this.defaultRoute = null;
     }
     
+    activateRoute(route) {
+        let content = this.titleBar.element.find('.page-content');
+        content.empty();
+        
+        this.routeMap[route].appendToElement(content);
+    }
+    
     addRoute(id, pageObject, defaultRoute = false) {
         this.titleBar.addLink(id, '');
 
@@ -21,5 +28,9 @@ export class ApplicationBase {
     
     show(element) {
         this.titleBar.appendToElement(element);
+        
+        if (this.defaultRoute) {
+            this.activateRoute(this.defaultRoute);
+        }
     }
 }
